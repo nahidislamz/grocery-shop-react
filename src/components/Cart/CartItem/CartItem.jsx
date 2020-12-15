@@ -3,12 +3,14 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import Typography from '@material-ui/core/Typography';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import red from '@material-ui/core/colors/red';
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -33,11 +35,14 @@ const useStyles = makeStyles((theme) => ({
     height: 38,
     width: 38,
   },
+  icon_red:{
+    color:red[700],
+  },
 }));
 
 export default function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
   const classes = useStyles();
-  const theme = useTheme();
+
 
   const handleUpdateCartQty = (lineItemId, newQuantity) => onUpdateCartQty(lineItemId, newQuantity);
 
@@ -47,23 +52,23 @@ export default function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-          {item.name}
+            {item.name}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             {item.line_total.formatted_with_symbol}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-        <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}>
-           <RemoveCircleIcon color="secondary" />
-        </Button>
+        <IconButton  size="small" onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}>
+           <RemoveCircleIcon className={classes.icon_red} />
+        </IconButton>
           <Typography>&nbsp;{item.quantity}&nbsp;</Typography>
-        <Button type="button" size="small" onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}>
+        <IconButton  size="small" onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}>
             <AddCircleIcon color="primary"/>
-        </Button>
-        <Button type="button"  onClick={() => handleRemoveFromCart(item.id)}>
+        </IconButton>
+        <IconButton size="small" onClick={() => handleRemoveFromCart(item.id)}>
             <DeleteOutlineIcon color="secondary"/>
-        </Button>
+        </IconButton>
 
         </div>
       </div>

@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    textDecoration:'none',
+    color:'white',
   },
   search: {
     position: 'relative',
